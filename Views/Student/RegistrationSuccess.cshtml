@@ -1,0 +1,36 @@
+﻿<!-- Views/YourController/RegistrationSuccess.cshtml -->
+@{
+    ViewData["Title"] = "Registration Successful";
+}
+
+<div class="registration-success-container">
+    <h2>Registration Successful</h2>
+
+    <div class="success-message">
+        <p>Your registration is complete. Your Registration Number (StudentId) is: <strong>@ViewBag.StudentId</strong></p>
+    </div>
+
+    <p>Thank you for registering!</p>
+</div>
+
+<style>
+    /* Add CSS styles to customize the appearance */
+    .registration-success-container {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        background-color: #dff0d8; /* Bootstrap success alert color */
+        border: 1px solid #3c763d; /* Bootstrap success alert border color */
+        border-radius: 5px;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .success-message {
+        background-color: #d9edf7; /* Bootstrap info alert color */
+        border: 1px solid #31708f; /* Bootstrap info alert border color */
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+</style>

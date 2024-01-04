@@ -1,0 +1,64 @@
+﻿@model List<Student>
+
+<h2>Admin Dashboard</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Student ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Date of Birth</th>
+            <th>Qualification</th>
+            <!-- Add more columns as needed -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>@student.StudentId</td>
+                <td>@student.FirstName</td>
+                <td>@student.LastName</td>
+                <td>@student.DOB.ToShortDateString()</td>
+                <td>
+                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#qualificationsModal" onclick="loadQualifications(@student.StudentId)">See Qualifications</button>
+                </td>
+                <!-- Add more columns as needed -->
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div id="qualificationsModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Qualification Details</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" id="qualificationsContent">
+                <!-- Qualifications content will be loaded here dynamically -->
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        function loadQualifications(studentId) {
+            $.ajax({
+                url: '@Url.Action("LoadQualifications", "Admin")',
+                type: 'GET',
+                data: { studentId: studentId },
+                success: function (data) {
+                    $('#qualificationsContent').html(data);
+                    $('#qualificationsModal').modal('show');
+                },
+                error: function () {
+                    alert('Error loading qualifications.');
+                }
+            });
+        }
+    </script>
+}
